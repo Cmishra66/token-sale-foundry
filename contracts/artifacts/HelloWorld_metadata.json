@@ -1,0 +1,63 @@
+{
+	"compiler": {
+		"version": "0.8.22+commit.4fc1097e"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [],
+				"name": "print",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "pure",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {
+				"print()": {
+					"details": "Prints Hello World string"
+				}
+			},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/HelloWorld.sol": "HelloWorld"
+		},
+		"evmVersion": "shanghai",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contracts/HelloWorld.sol": {
+			"keccak256": "0xb8bae1ab5e35f4c97d9ab02ad8f08a3767d1c3effc6ac4bd93a34e085ddc5824",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://f9e2b85a7ef4370c36cd698320b267d7715ba6f747cf50f46d9c022aa0959511",
+				"dweb:/ipfs/QmQmY3UrCqJSkVvvBuVVZodvDqJUV158myMTxnsMXPvySE"
+			]
+		}
+	},
+	"version": 1
+}

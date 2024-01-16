@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Token Sale Frontend</title>
+    
+    <script src="https://cdn.jsdelivr.net/npm/web3@1.5.0/dist/web3.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        button {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Token Sale</h1>
+    <div id="account-info"></div>
+    <div>
+        <label for="contribution-amount">Contribution Amount (ETH): </label>
+        <input type="number" id="contribution-amount" step="0.01">
+        <button onclick="contributeToPresale()">Contribute to Presale</button>
+        <button onclick="contributeToPublicSale()">Contribute to Public Sale</button>
+        <button onclick="claimRefund()">Claim Refund</button>
+    </div>
+
+    <script>
+        const contractAddress = '0x1AB988fB3F546E7cda20E8c209400aad73EC2dB9'; // Replace with your actual contract address
+        const contractABI = [[
+	{
+		"inputs": [
+			{
+				"internalType": "contract ERC20",
+				"name": "_token",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_presaleCap",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_publicSaleCap",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_presaleMinContribution",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_presaleMaxContribution",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_publicSaleMinContribution",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_publicSaleMaxContribution",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_presaleEndTime",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_publicSaleStartTime",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_publicSaleEndTime",
+				"type": "uint256"
+			},
+			{
+				"internalType": "address",
+				"name": "_owner",
+				"type": "address"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "owner",
+				"type": "address"
+			}
+		],
+		"name": "OwnableInvalidOwner",
+		"type": "error"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "account",
+				"type": "address"
+			}
+		],
+		"name": "OwnableUnauthorizedAccount",
+		"type": "error"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "previousOwner",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "newOwner",
+				"type": "address"
+			}
+		],
+		"name": "OwnershipTransferred",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "contributor",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			}
+		],
+		"name": "RefundClaimed",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "recipient",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			}
+		],
+		"name": "TokensDistributed",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "buyer",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "totalContribution",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "bool",
+				"name": "isPresale",
+				"type": "bool"
+			}
+		],
+		"name": "TokensPurchased",
+		"type": "event"
+	},
+	{
+		"inputs": [],
+		"name": "claimRefund",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "closePresaleAndStartPublicSale",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "closePublicSale",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "contributeToPresale",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "contributeToPublicSale",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_recipient",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_amount",
+				"type": "uint256"
+			}
+		],
+		"name": "distributeTokens",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_presaleEndTime",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_publicSaleEndTime",
+				"type": "uint256"
+			}
+		],
+		"name": "extendSalePeriod",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "owner",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "presaleCap",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "presaleClosed",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "presaleContributions",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "presaleEndTime",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "presaleMaxContribution",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "presaleMinContribution",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "publicSaleCap",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "publicSaleClosed",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "publicSaleContributions",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "publicSaleEndTime",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "publicSaleMaxContribution",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "publicSaleMinContribution",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "publicSaleStartTime",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "renounceOwnership",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "token",
+		"outputs": [
+			{
+				"internalType": "contract ERC20",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "newOwner",
+				"type": "address"
+			}
+		],
+		"name": "transferOwnership",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "withdrawExcessFunds",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	}
+]]; // Replace with your actual contract ABI
+
+        let web3;
+        let contract;
+
+        async function initWeb3() {
+            if (window.ethereum) {
+                web3 = new Web3(window.ethereum);
+                try {
+                    await window.ethereum.enable();
+                } catch (error) {
+                    console.error("User denied account access");
+                }
+            } else if (window.web3) {
+                web3 = new Web3(window.web3.currentProvider);
+            } else {
+                console.error("No Ethereum provider detected");
+            }
+
+            contract = new web3.eth.Contract(contractABI, contractAddress);
+            checkAccount();
+        }
+
+        async function checkAccount() {
+            const accounts = await web3.eth.getAccounts();
+            const account = accounts[0];
+            document.getElementById('account-info').innerHTML = account ? `Connected Account: ${account}` : 'Not connected';
+        }
+
+        async function contributeToPresale() {
+            const amount = document.getElementById('contribution-amount').value;
+
+            try {
+                await contract.methods.contributeToPresale().send({ value: web3.utils.toWei(amount, 'ether') });
+                console.log('Contribution to Presale successful');
+            } catch (error) {
+                console.error('Error contributing to Presale', error);
+            }
+
+            checkAccount();
+        }
+
+        async function contributeToPublicSale() {
+            const amount = document.getElementById('contribution-amount').value;
+
+            try {
+                await contract.methods.contributeToPublicSale().send({ value: web3.utils.toWei(amount, 'ether') });
+                console.log('Contribution to Public Sale successful');
+            } catch (error) {
+                console.error('Error contributing to Public Sale', error);
+            }
+
+            checkAccount();
+        }
+
+        async function claimRefund() {
+            try {
+                await contract.methods.claimRefund().send();
+                console.log('Refund claimed successfully');
+            } catch (error) {
+                console.error('Error claiming refund', error);
+            }
+
+            checkAccount();
+        }
+
+        initWeb3();
+    </script>
+</body>
+</html>
