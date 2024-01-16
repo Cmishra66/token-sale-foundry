@@ -1,0 +1,14 @@
+2024-01-16 22:44:20.745 [info] 
+
+
+
+
+2024-01-16 22:44:20.745 [info] Extension host agent started.
+2024-01-16 22:44:20.745 [info] Started initializing default profile extensions in extensions installation folder. file:///home/kiit/.vscode-server/extensions
+2024-01-16 22:44:20.759 [info] Completed initializing default profile extensions in extensions installation folder. file:///home/kiit/.vscode-server/extensions
+2024-01-16 22:44:20.905 [info] [127.0.0.1][c3c37be7][ManagementConnection] New connection established.
+2024-01-16 22:44:21.238 [info] [127.0.0.1][8f0a61de][ExtensionHostConnection] New connection established.
+2024-01-16 22:44:21.258 [info] [127.0.0.1][8f0a61de][ExtensionHostConnection] <701> Launched Extension Host Process.
+2024-01-16 23:00:05.958 [info] [127.0.0.1][cd455eea][ManagementConnection] New connection established.
+2024-01-16 23:00:06.915 [info] [127.0.0.1][5eb2ef35][ExtensionHostConnection] New connection established.
+2024-01-16 23:00:06.922 [info] [127.0.0.1][5eb2ef35][ExtensionHostConnection] <2461> Launched Extension Host Process.

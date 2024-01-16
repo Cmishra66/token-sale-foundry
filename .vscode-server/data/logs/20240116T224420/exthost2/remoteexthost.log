@@ -1,0 +1,17 @@
+2024-01-16 23:00:07.619 [info] Extension host with pid 2461 started
+2024-01-16 23:00:07.680 [info] ExtensionService#_doActivateExtension vscode.git-base, startup: true, activationEvent: '*'
+2024-01-16 23:00:07.687 [info] Lock '/home/kiit/.vscode-server/data/User/workspaceStorage/b990cc2445126e36d0fd3eabbc866fb2/vscode.lock': Lock acquired.
+2024-01-16 23:00:07.745 [info] ExtensionService#_doActivateExtension vscode.github, startup: true, activationEvent: '*'
+2024-01-16 23:00:07.836 [info] Eager extensions activated
+2024-01-16 23:00:07.838 [info] ExtensionService#_doActivateExtension vscode.debug-auto-launch, startup: false, activationEvent: 'onStartupFinished'
+2024-01-16 23:00:07.839 [info] ExtensionService#_doActivateExtension vscode.merge-conflict, startup: false, activationEvent: 'onStartupFinished'
+2024-01-16 23:00:11.585 [info] ExtensionService#_doActivateExtension vscode.git, startup: false, activationEvent: 'api', root cause: vscode.github
+2024-01-16 23:00:11.893 [warning] [Decorations] CAPPING events from decorations provider vscode.git 1157
+2024-01-16 23:00:25.306 [info] ExtensionService#_doActivateExtension vscode.emmet, startup: false, activationEvent: 'onLanguage'
+2024-01-16 23:00:34.515 [info] ExtensionService#_doActivateExtension vscode.html-language-features, startup: false, activationEvent: 'onLanguage:html'
+2024-01-16 23:00:44.105 [warning] [Decorations] CAPPING events from decorations provider vscode.git 1158
+2024-01-16 23:00:49.170 [warning] [Decorations] CAPPING events from decorations provider vscode.git 1158
+2024-01-16 23:00:54.235 [warning] [Decorations] CAPPING events from decorations provider vscode.git 1158
+2024-01-16 23:00:59.303 [warning] [Decorations] CAPPING events from decorations provider vscode.git 1158
+2024-01-16 23:01:10.639 [info] ExtensionService#_doActivateExtension vscode.json-language-features, startup: false, activationEvent: 'onLanguage:jsonc'
+2024-01-16 23:01:10.639 [info] ExtensionService#_doActivateExtension vscode.typescript-language-features, startup: false, activationEvent: 'onLanguage:jsonc'
