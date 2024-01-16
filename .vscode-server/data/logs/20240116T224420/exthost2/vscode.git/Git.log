@@ -53,3 +53,70 @@
 2024-01-16 23:00:59.257 [info] No remotes found in the git config file.
 2024-01-16 23:00:59.257 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/master refs/remotes/master [1ms]
 2024-01-16 23:00:59.293 [info] > git status -z -uall [29ms]
+2024-01-16 23:01:16.390 [info] > git add -A -- . [5907ms]
+2024-01-16 23:01:16.390 [info] warning: adding embedded git repository: foundry/swap
+hint: You've added another git repository inside your current repository.
+hint: Clones of the outer repository will not contain the contents of
+hint: the embedded repository and will not know how to obtain it.
+hint: If you meant to add a submodule, use:
+hint: 
+hint: 	git submodule add <url> foundry/swap
+hint: 
+hint: If you added this path by mistake, you can remove it from the
+hint: index with:
+hint: 
+hint: 	git rm --cached foundry/swap
+hint: 
+hint: See "git help submodule" for more information.
+2024-01-16 23:01:16.440 [info] > git -c user.useConfigOnly=true commit --quiet --allow-empty-message --file - [43ms]
+2024-01-16 23:01:16.445 [info] > git config --get commit.template [1ms]
+2024-01-16 23:01:16.453 [info] > git config --get commit.template [0ms]
+2024-01-16 23:01:16.457 [info] No remotes found in the git config file.
+2024-01-16 23:01:16.458 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/master refs/remotes/master [0ms]
+2024-01-16 23:01:16.474 [info] > git status -z -uall [13ms]
+2024-01-16 23:01:16.495 [info] > git config --get commit.template [1ms]
+2024-01-16 23:01:16.502 [info] No remotes found in the git config file.
+2024-01-16 23:01:16.503 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/master refs/remotes/master [2ms]
+2024-01-16 23:01:16.513 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/master [1ms]
+2024-01-16 23:01:16.518 [info] > git status -z -uall [11ms]
+2024-01-16 23:01:16.522 [info] > git config --local branch.master.vscode-merge-base [4ms]
+2024-01-16 23:01:16.526 [info] > git reflog refs/heads/master --grep-reflog=branch: Created from *. [1ms]
+2024-01-16 23:01:16.535 [info] > git symbolic-ref --short refs/remotes/origin/HEAD [3ms]
+2024-01-16 23:01:16.535 [info] fatal: ref refs/remotes/origin/HEAD is not a symbolic ref
+2024-01-16 23:01:17.216 [info] > git check-ignore -v -z --stdin [3ms]
+2024-01-16 23:01:17.825 [info] > git ls-files --stage -- /home/kiit/index.html [1ms]
+2024-01-16 23:01:17.830 [info] > git cat-file -s d006a91ac45a98c25af547416f1e027eea03ab81 [1ms]
+2024-01-16 23:01:17.845 [info] > git show --textconv :index.html [3ms]
+2024-01-16 23:01:26.692 [info] > git config --get commit.template [1ms]
+2024-01-16 23:01:26.693 [info] No remotes found in the git config file.
+2024-01-16 23:01:26.697 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/master refs/remotes/master [1ms]
+2024-01-16 23:01:26.715 [info] > git status -z -uall [15ms]
+2024-01-16 23:02:45.305 [info] > git config --get commit.template [1ms]
+2024-01-16 23:02:45.316 [info] No remotes found in the git config file.
+2024-01-16 23:02:45.321 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/master refs/remotes/master [6ms]
+2024-01-16 23:02:45.367 [info] > git status -z -uall [40ms]
+2024-01-16 23:02:50.391 [info] > git config --get commit.template [2ms]
+2024-01-16 23:02:50.397 [info] No remotes found in the git config file.
+2024-01-16 23:02:50.398 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/master refs/remotes/master [2ms]
+2024-01-16 23:02:50.417 [info] > git status -z -uall [15ms]
+2024-01-16 23:03:08.780 [info] > git config --get commit.template [2ms]
+2024-01-16 23:03:08.783 [info] No remotes found in the git config file.
+2024-01-16 23:03:08.784 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/master refs/remotes/master [1ms]
+2024-01-16 23:03:08.800 [info] > git status -z -uall [13ms]
+2024-01-16 23:03:09.480 [info] > git check-ignore -v -z --stdin [1ms]
+2024-01-16 23:03:11.840 [info] > git fetch [2ms]
+2024-01-16 23:03:11.845 [info] > git config --get commit.template [1ms]
+2024-01-16 23:03:11.848 [info] No remotes found in the git config file.
+2024-01-16 23:03:11.852 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/master refs/remotes/master [4ms]
+2024-01-16 23:03:11.867 [info] > git status -z -uall [12ms]
+2024-01-16 23:03:13.042 [info] > git ls-files --stage -- /home/kiit/index.html [2ms]
+2024-01-16 23:03:13.047 [info] > git cat-file -s d006a91ac45a98c25af547416f1e027eea03ab81 [1ms]
+2024-01-16 23:03:13.062 [info] > git show --textconv :index.html [1ms]
+2024-01-16 23:03:13.829 [info] > git config --get commit.template [1ms]
+2024-01-16 23:03:13.833 [info] No remotes found in the git config file.
+2024-01-16 23:03:13.834 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/master refs/remotes/master [1ms]
+2024-01-16 23:03:13.848 [info] > git status -z -uall [11ms]
+2024-01-16 23:03:20.362 [info] > git config --get commit.template [0ms]
+2024-01-16 23:03:20.366 [info] No remotes found in the git config file.
+2024-01-16 23:03:20.367 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/master refs/remotes/master [1ms]
+2024-01-16 23:03:20.383 [info] > git status -z -uall [11ms]
